@@ -1,5 +1,7 @@
 package com.udacity.jdnd.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.udacity.jdnd.controller.NameAndPrice;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
@@ -12,8 +14,10 @@ public class Plant {
     @GeneratedValue
     private Long id;
     @Nationalized
+    @JsonView(NameAndPrice.class)
     private String name;
     @Column(precision = 12,scale = 4)
+    @JsonView(NameAndPrice.class)
     private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "delivery_id")
