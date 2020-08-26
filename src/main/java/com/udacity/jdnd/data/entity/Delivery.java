@@ -1,13 +1,20 @@
 package com.udacity.jdnd.data.entity;
 
 import org.hibernate.annotations.Nationalized;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries(
+        @NamedQuery(
+                name = "Delivery.findDeliveriesByName",
+                query = "select d from Delivery d where d.recipientName = :recipientName")
+)
 @Entity
 public class Delivery {
     @Id
@@ -22,7 +29,8 @@ public class Delivery {
     @Type(type = "yes_no")
     private Boolean completed;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery",cascade = CascadeType.ALL)
+    @OnDelete( action = OnDeleteAction.CASCADE )
     private List<Plant> plants;
 
     public Delivery() {
@@ -68,4 +76,13 @@ public class Delivery {
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
+
+    public List<Plant> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(List<Plant> plants) {
+        this.plants = plants;
+    }
+
 }

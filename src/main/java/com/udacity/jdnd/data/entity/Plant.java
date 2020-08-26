@@ -19,7 +19,7 @@ public class Plant {
     @Column(precision = 12,scale = 4)
     @JsonView(NameAndPrice.class)
     private BigDecimal price;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 

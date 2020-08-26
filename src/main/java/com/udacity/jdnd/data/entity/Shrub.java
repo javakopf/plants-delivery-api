@@ -1,7 +1,6 @@
 package com.udacity.jdnd.data.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 public class Shrub extends Plant{
